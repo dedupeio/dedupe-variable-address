@@ -82,7 +82,7 @@ def compareIntersections(address_1, address_2) :
 
 
 class USAddressType(StringType) :
-    type = "USAddress"
+    type = "Address"
 
     components = {'Street Address' :
                       AddressType(compare=functools.partial(compareFields,
