@@ -10,7 +10,7 @@ setup(
     version='0.0.0.1',
     #description='A python library for accurate and scaleable data deduplication and entity-resolution',
     packages=['dedupe.variables'],
-    install_requires=['usaddress'],
+    install_requires=['usaddress', 'dedupe'],
     #ext_modules=[Extension('dedupe.cpredicates', ['src/cpredicates.c'])],
     #license='The MIT License: http://www.opensource.org/licenses/mit-license.php
     )
