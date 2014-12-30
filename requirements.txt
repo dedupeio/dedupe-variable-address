@@ -1,2 +1,2 @@
 usaddress
--e git://github.com/datamade/dedupe.git#egg=dedupe
+dedupe
