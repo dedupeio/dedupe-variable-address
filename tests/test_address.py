@@ -1,5 +1,6 @@
 import unittest
 import dedupe
+import dedupe.variables
 from dedupe.variables.address import USAddressType
 import numpy
 
