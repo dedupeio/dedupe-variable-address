@@ -87,24 +87,24 @@ class USAddressType(StringType) :
     components = {'Street Address' :
                       AddressType(compare=functools.partial(compareFields,
                                             parts = STREET_PARTS),
-                                  indicator=[1, 0, 0],
+                                  indicator=[0, 0, 0],
                                   offset=0),
                   'PO Box' :
                       AddressType(compare=functools.partial(compareFields,
                                             parts = BOX_PARTS),
-                                  indicator=[0, 1, 0],
+                                  indicator=[1, 0, 0],
                                   offset= len(STREET)),
                   'Intersection' :
                       AddressType(compare=compareIntersections,
-                                  indicator=[0, 0, 1],
+                                  indicator=[0, 1, 0],
                                   offset = len(STREET 
                                                + BOX))}
 
-    # missing? + same_type? + len(indicator) + ...
+    # missing? + same_type? + len(indicator) + ... + full_string
     expanded_size = 1 + 1 + 3 + 2 * len(STREET 
                                         + BOX
                                         + INTERSECTION_A
-                                        + INTERSECTION_B)
+                                        + INTERSECTION_B) + 1
 
     def __len__(self) :
         return self.expanded_size
@@ -117,7 +117,9 @@ class USAddressType(StringType) :
                     ('same address type?', 'Dummy'),
                     ('street address Type', 'Dummy'),
                     ('po box', 'Dummy'),
-                    ('intersection', 'Dummy')]
+                    ('intersection', 'Dummy'),
+                    ('ambiguous', 'Dummy')]
+        
 
         address_parts = [(part, 'String') 
                          for part
@@ -132,10 +134,14 @@ class USAddressType(StringType) :
                                      for part, _ in address_parts]
 
         fields = preamble + address_parts + not_missing_address_parts
+        fields.append(('full string', 'String'))
         
         self.higher_vars = [DerivedType({'name' : name,
                                          'type' : field_type})
                             for name, field_type in fields]
+
+
+
 
     def comparator(self, field_1, field_2) :
         distances = numpy.zeros(self.expanded_size)
@@ -152,6 +158,13 @@ class USAddressType(StringType) :
             address_2, address_type_2  = usaddress.tag(field_2)
         except Exception as e :
             print e
+            return distances
+
+        if 'Ambiguous' in (address_type_1, address_type_2) :
+            distances[i] = 1
+            i += 1
+            distances[i:5] = [0, 0, 1]
+            distances[-1] = compareString(field_1, field_2)
             return distances
 
         if address_type_1 != address_type_2 :
