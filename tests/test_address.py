@@ -9,7 +9,7 @@ class TestPrice(unittest.TestCase):
         us = USAddressType({'field' : 'foo'})
         numpy.testing.assert_almost_equal(us.comparator('123 E Main St', 
                                                         '124 W Main St'),
-            numpy.array([1, 1, 0, 0, 0, 2.16666675,
+            numpy.array([1, 0, 1, 0, 0, 2.16666675,
                          5.5, 0.5, 0.5, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0,
                          0, 0, 1, 1, 1, 1, 0,
@@ -27,7 +27,7 @@ class TestPrice(unittest.TestCase):
                                 
         numpy.testing.assert_almost_equal(us.comparator('po box 31', 
                                                         'po box 41'),
-            numpy.array([1, 1, 1, 0, 0, 0,
+            numpy.array([1, 0, 1, 1, 0, 0, 
                          0, 0, 0, 0, 0, 0, 0,
                          0, 0.5, 3, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0,
@@ -36,7 +36,7 @@ class TestPrice(unittest.TestCase):
 
         numpy.testing.assert_almost_equal(us.comparator('69th and main st', 
                                                         '70th and main st'),
-            numpy.array([1, 1, 0, 1, 0, 0,
+            numpy.array([1, 0, 1, 0, 1, 0, 
                          0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 3, 0, 0,
                          0.5, 0.5, 0, 0, 0, 0, 0,
@@ -49,12 +49,14 @@ class TestPrice(unittest.TestCase):
                                                  '70th and main st'))
 
         numpy.testing.assert_almost_equal(us.comparator('foo', 'bar'),
-            numpy.array([1, 1, 0, 0, 1, 0,
+            numpy.array([1, 1, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 5.5]))
+
+        assert len(us.comparator('foo','bar')) == len(us.higher_vars)
 
 
         
