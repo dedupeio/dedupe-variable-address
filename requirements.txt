@@ -1,2 +1,2 @@
-usaddress
-dedupe
+nose
+coverage
