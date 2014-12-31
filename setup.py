@@ -7,7 +7,7 @@ except ImportError :
 setup(
     name='dedupe-variable-address',
     #url='https://github.com/datamade/dedupe',
-    version='0.0.0.3',
+    version='0.0.0.4',
     #description='A python library for accurate and scaleable data deduplication and entity-resolution',
     packages=['dedupe.variables'],
     install_requires=['usaddress', 'dedupe'],
