@@ -1,4 +1,5 @@
-from dedupe.variables.fieldclasses import DerivedType, StringType
+from dedupe.variables.base import DerivedType
+from dedupe.variables.string import StringType
 import collections
 import functools
 import numpy
