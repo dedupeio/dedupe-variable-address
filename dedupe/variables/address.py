@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from dedupe.variables.base import DerivedType
 from dedupe.variables.string import StringType
 import collections
@@ -39,10 +41,10 @@ INTERSECTION_B = (('street direction B', ('SecondStreetNamePreDirectional',
                                           'SecondStreetNamePostModifier')),
                   ('street type B',      ('SecondStreetNamePostType',
                                           'SecondStreetNamePreType')))
-STREET_NAMES, STREET_PARTS = zip(*STREET)
-BOX_NAMES, BOX_PARTS = zip(*BOX)
-INTERSECTION_A_NAMES, INTERSECTION_A_PARTS = zip(*INTERSECTION_A)
-INTERSECTION_B_NAMES, INTERSECTION_B_PARTS = zip(*INTERSECTION_B)
+STREET_NAMES, STREET_PARTS = list(zip(*STREET))
+BOX_NAMES, BOX_PARTS = list(zip(*BOX))
+INTERSECTION_A_NAMES, INTERSECTION_A_PARTS = list(zip(*INTERSECTION_A))
+INTERSECTION_B_NAMES, INTERSECTION_B_PARTS = list(zip(*INTERSECTION_B))
 
 AddressType = collections.namedtuple('AddressType', 
                                      ['compare', 'indicator', 
@@ -156,7 +158,7 @@ class USAddressType(StringType) :
             address_1, address_type_1 = usaddress.tag(field_1) 
             address_2, address_type_2  = usaddress.tag(field_2)
         except Exception as e :
-            print e
+            print(e)
             return distances
 
         if 'Ambiguous' not in (address_type_1, address_type_2) :

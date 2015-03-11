@@ -1,5 +1,6 @@
 import unittest
 import dedupe.variables
+import dedupe.variables.address
 from dedupe.variables.address import USAddressType
 
 import numpy
@@ -65,5 +66,5 @@ class TestPrice(unittest.TestCase):
 
 def prettyPrint(us, comparison) :
     for e in zip(us.higher_vars, comparison) :
-        print "%s:\t %s" % e
+        print("%s:\t %s" % e)
 
