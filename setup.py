@@ -7,9 +7,9 @@ except ImportError :
 setup(
     name='dedupe-variable-address',
     url='https://github.com/datamade/dedupe-variables-address',
-    version='0.0.3',
+    version='0.0.4',
     description='Address variable type for dedupe',
     packages=['dedupe.variables'],
-    install_requires=['usaddress', 'dedupe', 'future'],
+    install_requires=['usaddress', 'parseratorvariable', 'future'],
     license='The MIT License: http://www.opensource.org/licenses/mit-license.php'
     )
