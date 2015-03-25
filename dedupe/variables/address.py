@@ -142,6 +142,7 @@ class USAddressType(StringType) :
                             for name, field_type in fields]
 
 
+        self.log_file = definition.get('log file', None)
 
 
     def comparator(self, field_1, field_2) :
@@ -158,18 +159,26 @@ class USAddressType(StringType) :
             address_1, address_type_1 = usaddress.tag(field_1) 
             address_2, address_type_2  = usaddress.tag(field_2)
         except Exception as e :
-            print(e)
-            return distances
-
-        if 'Ambiguous' not in (address_type_1, address_type_2) :
-            if address_type_1 == address_type_2 :
-                distances[i:3] = [0, 1]
-            else :
-                return distances
-        else :
+            if self.log_file :
+                import csv
+                with open(self.log_file, 'a') as f :
+                    writer = csv.writer(f)
+                    writer.writerow([field_1])
+                    writer.writerow([field_2])
             distances[i:3] = [1, 0]
             distances[-1] = compareString(field_1, field_2)
             return distances
+
+        if 'Ambiguous' in (address_type_1, address_type_2) :
+            distances[i:3] = [1, 0]
+            distances[-1] = compareString(field_1, field_2)
+            return distances
+        elif address_type_1 != address_type_2 :
+            distances[i:3] = [0, 0]
+            distances[-1] = compareString(field_1, field_2)
+            return distances
+        elif address_type_1 == address_type_2 : 
+            distances[i:3] = [0, 1]
 
         i += 2
 

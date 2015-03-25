@@ -24,7 +24,7 @@ class TestPrice(unittest.TestCase):
                          0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0, 0, 0,
-                         0, 0, 0, 0, 0, 0]))
+                         0, 0, 0, 0, 0, 4.715909]))
                                 
         numpy.testing.assert_almost_equal(us.comparator('po box 31', 
                                                         'po box 41'),
