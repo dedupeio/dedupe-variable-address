@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-from parseratorvariable import ParseratorType, compareFields, comparePermutable
+from parseratorvariable import ParseratorType
 import usaddress
 
 STREET = (('address number',   ('AddressNumberPrefix',
@@ -44,7 +44,11 @@ class USAddressType(ParseratorType) :
     def tagger(self, field) :
         return usaddress.tag(field)
 
-    components = (('Street Address', compareFields, STREET),
-                  ('PO Box', compareFields, BOX),
-                  ('Intersection', comparePermutable, INTERSECTION_A,
-                   INTERSECTION_B))
+    def __init__(self, definition) :
+        self.components = (('Street Address', self.compareFields, STREET),
+                           ('PO Box', self.compareFields, BOX),
+                           ('Intersection', self.comparePermutable, 
+                            INTERSECTION_A, INTERSECTION_B))
+
+        super(USAddressType, self).__init__(definition)
+

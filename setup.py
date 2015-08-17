@@ -10,6 +10,6 @@ setup(
     version='0.0.4',
     description='Address variable type for dedupe',
     packages=['dedupe.variables'],
-    install_requires=['usaddress', 'parseratorvariable', 'future'],
+    install_requires=['usaddress', 'parseratorvariable >= 0.0.10', 'future'],
     license='The MIT License: http://www.opensource.org/licenses/mit-license.php'
     )
