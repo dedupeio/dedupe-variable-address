@@ -42,7 +42,7 @@ class USAddressType(ParseratorType) :
     type = "Address"
     
     def tagger(self, field) :
-        return usaddress.tag(field)
+        return self.tag(field)
 
     def __init__(self, definition) :
         self.components = (('Street Address', self.compareFields, STREET),
@@ -50,5 +50,6 @@ class USAddressType(ParseratorType) :
                            ('Intersection', self.comparePermutable, 
                             INTERSECTION_A, INTERSECTION_B))
 
-        super(USAddressType, self).__init__(definition)
+        block_parts = ('StreetName',)
+        super(USAddressType, self).__init__(definition, usaddress.tag, block_parts)
 
