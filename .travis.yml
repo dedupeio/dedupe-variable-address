@@ -9,13 +9,14 @@ notifications:
     on_failure: always
   irc: chat.freenode.net#dedupe
 python:
-- "2.7_with_system_site_packages"
+- 2.7
 - 3.4
 install:
-- pip install -r requirements.txt
-- pip install python-coveralls
-- python setup.py develop
+  - pip install -r requirements.txt
+  - pip install -e .
 script:
-- coverage run -m nose
-after_success: coveralls
+  - pytest tests --cov=dedupe
+after_success:
+  - pip install coveralls
+  - coveralls
 sudo : off
