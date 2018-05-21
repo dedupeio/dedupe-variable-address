@@ -12,11 +12,20 @@ python:
 - 2.7
 - 3.4
 install:
-  - pip install -r requirements.txt
-  - pip install -e .
+- pip install -r requirements.txt
+- pip install -e .
 script:
-  - pytest tests --cov=dedupe
+- pytest tests --cov=dedupe
 after_success:
-  - pip install coveralls
-  - coveralls
-sudo : off
+- pip install coveralls
+- coveralls
+sudo: false
+deploy:
+  provider: pypi
+  user: datamade.wheelbuilder
+  password:
+    secure: ATa6UhJE3L2jn67wBq4aR6A/yNMQK8qsJI6Qg8Rm3KllwhggfNfVPVa9Pxs10cagtDlwCevK6LnJEtVnTJsV8RIaaH2joXtPs9dlZAcD4yWMT4LpAv8E7di+NvjAuPkEEtUei5fMqfEVAmyrR4OUMzhi6bo4dE7lYFh/+Ne7kEY=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: dedupeio/dedupe-variable-address
