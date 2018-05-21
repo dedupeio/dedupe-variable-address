@@ -17,9 +17,7 @@ STREET = (('address number',   ('AddressNumberPrefix',
           ('occupancy id',     ('OccupancyIdentifier',)),
           ('building name',    ('BuildingName',)))
 
-BOX =  (('box group type', ('USPSBoxGroupType',)),
-        ('box group id',   ('USPSBoxGroupID',)),
-        ('box type',       ('USPSBoxType',)),
+BOX =  (('box group id',   ('USPSBoxGroupID',)),
         ('box id',         ('USPSBoxID',)))
 
 INTERSECTION_A = (('street direction A', ('StreetNamePreDirectional',
